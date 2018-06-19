@@ -1,4 +1,6 @@
 <?php
+###New commenter
+### Olutola Obembe
 include "settings.php";
 include "wizard.php";
 ## Connect using the connect db function
