@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+# smf2wp
+smf conversion to wordpress
+
+New files should be added
+
+=======
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/flukkytom/smf2wp/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
@@ -35,3 +42,4 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Support or Contact
 
 Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+>>>>>>> fe421ca7312b38420f4aa6a0488a73bb3d477b94
