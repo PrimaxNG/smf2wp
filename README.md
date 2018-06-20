@@ -1,37 +1,24 @@
-## Welcome to GitHub Pages
+## Welcome to SMF2WP
 
-You can use the [editor on GitHub](https://github.com/flukkytom/smf2wp/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Now you do not have to be stuck with SMF forum alone anymore and probably do not have to pay too high to have a minimal conversion of your SMF posts
+into Wordpress. SMF2WP does just that for you.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+### How it works?
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
+Here is how it works in 3 simple steps;
 ```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
+1. Create your MSF Database connection
+2. Create your new Wordpress Database Connectiooon
+3. Load up smf2wp index.php and Fire the Convert button
 
-1. Numbered
-2. List
+
+NOTE: If your database is connected proper;y, you will see your posts count on both database before and after the migration.
 
 **Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/flukkytom/smf2wp/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+###Good Luck!
