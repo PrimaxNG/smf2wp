@@ -1,11 +1,13 @@
 <?php
 ###New commenter
 ### Olutola Obembe
-include "settings.php";
-include "wizard.php";
-## Connect using the connect db function
-$conn = connect($db_server,$db_port,$db_user,$db_password,$db_name);
+include ("settings.php");
+include ("wizard.php");
 
+## Connect using the connect db function
+$connect = connect_new($db_host,$db_user,$db_pass,$db_name);
+
+	
 if (isset($_POST['convert']) ) {
 	$select="SELECT * from $smf_table_name order by id_msg ASC limit 0,200";
 	$smf_query=mysql_query($select);
@@ -99,7 +101,15 @@ echo displayMsg (@$errorCode,@$errorMsg);
   <div class="col-lg-4">
     <h4>SMF Table Name: <span class="text-danger"><?=$smf_table_name;?></span></h4>
 	<h4>Total Records: <br />
-	<span class="text-danger"><?php echo total_record ( $smf_table_name ) ;?></span></h4>
+	<span class="text-danger">
+	<?php echo total_record ( $smf_table_name ) ;
+	
+
+	#var_dump($result);
+	
+	
+	?>
+	</span></h4>
 	<hr class="label-warning" />
   </div>
   

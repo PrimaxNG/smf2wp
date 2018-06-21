@@ -17,15 +17,39 @@ function connect($host, $port, $user, $pass, $db) {
 	## selecting the required database for the application
 	$dbx = mysql_select_db($db);
 	##Check if db is connected
-	/*if ($cnx)
+	if ($cnx)
 		echo 'Database Connection  Possible';
 	if (!$cnx)
 		echo 'Database Connection Not Possible';
 	if ($dbx)
 		echo 'Application Database selected';
 	if (!$dbx)
-		echo 'Application Database not selected';*/
+		echo 'Application Database not selected';
 	return $cnx;	
+}
+
+function connect_new ($db_host, $db_user, $db_pass, $db_name) {
+	global $conn;
+	// OPEN A CONNECTION TO THE DATA BASE SERVER AND SELECT THE DB
+	$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+
+	// DID THE CONNECT/SELECT WORK OR FAIL?
+	if ($conn->connect_errno)
+	{
+		$err
+		= "CONNECT FAIL: "
+		. $conn->connect_errno
+		. ' '
+		. $conn->connect_error
+		;
+		trigger_error($err, E_USER_ERROR);
+	}
+	else {
+		#echo "Good to go";
+	}
+	// SHOW WHAT THE DB CONNECTION OBJECT LOOKS LIKE
+	#var_dump($conn);
+
 }
 
 function br() {
@@ -301,12 +325,16 @@ function bodyconvert ($post_body) {
 }
 
 function total_record ( $table_name ) {
-	$sqlrec="SELECT count(*) as total from $table_name";
-	$qrec=mysql_query($sqlrec);
-	$rowrec=fetch_assoc($qrec);
-	return $rowrec['total'];
+		global $conn;
+		$sqlrec="SELECT count(*) as total from $table_name";
+        $result = mysqli_query($conn, $sqlrec);
+		$row = mysqli_fetch_assoc($result);
+		
+
+		return $row['total'];
+		
+        mysqli_close($conn);
 }
 
 
-
-?>
+?>	

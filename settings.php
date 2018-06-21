@@ -1,12 +1,12 @@
 <?php
 ## MySQL Connection Parameters
-$db_server = 'localhost';
+$db_host = 'localhost';
 $db_port = '3306';
-$db_name = 'newsflash';
+$db_name = 'smf2wp';
 $db_user = 'root';
-$db_password = '';
+$db_pass = 'oluTOLA#835!';
 
-########## Table parameters
+
 
 ##SMF Table Name
 $smf_table_name="smf_messages";
