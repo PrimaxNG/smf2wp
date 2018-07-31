@@ -1,18 +1,18 @@
-<?php 
+<?php
 /*
-Database Reusable Function Scripts written By 
+Database Reusable Function Scripts written By
 Obembe Olutola Michael
 Primax Technologies Limited
 General Resuable Line of Codes (Queries)
 01/11/2007 - 02/11/2007
 
-Note: This Script is licensed under the GNU Licence 
+Note: This Script is licensed under the GNU Licence
 this section must be left untouched
 */
 function connect($host, $port, $user, $pass, $db) {
 	//merge hostname and port e.g localhost:3306
 	$host=$host.":".$port;
-	## Using the mysql_connect function to connect to DB..could also use mysql_pconnect 
+	## Using the mysql_connect function to connect to DB..could also use mysql_pconnect
 	$cnx = mysql_connect($host,$user,$pass);
 	## selecting the required database for the application
 	$dbx = mysql_select_db($db);
@@ -25,7 +25,7 @@ function connect($host, $port, $user, $pass, $db) {
 		echo 'Application Database selected';
 	if (!$dbx)
 		echo 'Application Database not selected';
-	return $cnx;	
+	return $cnx;
 }
 
 function connect_new ($db_host, $db_user, $db_pass, $db_name) {
@@ -79,7 +79,7 @@ function db_value($table,$field, $where,$value)	{
 		$row="select $field from $table where $where='$value'";
 		$query = @mysql_query($row);
 	}
-	
+
 	$row= fetch_assoc($query);
 	return $row[$field];
 }
@@ -93,14 +93,14 @@ function db_value_where($table,$field, $where)	{
 			##echo "select $field from $table where $where";
 		$query = @mysql_query("select $field from $table where $where");
 	}
-	
+
 	$row= fetch_assoc($query);
 	return $row[$field];
 }
 
 function field_num($result) {
 	//get number of table fields
-	$num_fields= mysql_num_fields($result); 
+	$num_fields= mysql_num_fields($result);
 	return $num_fields;
 }
 
@@ -109,7 +109,7 @@ function value($array) {
 
 	for ($c=0; $c<=count($array); $c++) {
 		echo $array[$c];
-		
+
 	}
 }
 
@@ -129,7 +129,7 @@ function value_arg() {
 function field_name($ssql) {
 	//get name of fields
 		$num_f = mysql_num_fields($ssql);
-		
+
 		for ($n = 0; $n<=$num_f; $n++) {
 			//declare array list
 			$array_list[$n] = @mysql_field_name($ssql, $n);
@@ -148,7 +148,7 @@ function fetch_assoc($resource)	{
 function insert_all($table_tab) {
 
 	//echo fields(reports); br();
-	$totalfield = field_num(fields($table_tab)); 
+	$totalfield = field_num(fields($table_tab));
 	// list array list (for table fields)
 	$arrayfield = field_name( fields( $table_tab ) );
 
@@ -160,14 +160,14 @@ function insert_all($table_tab) {
 		// build insertion field
 		$ssql_field_set = "SET ";
 		for ($nf = 1; $nf <= ($total_field - 1); $nf++) {
-			
+
 			$ssql_field.=  ",";
 			$ssql_field.= $arr_field[$nf] ."=";
 			$ssql_field.= "'";
 			$ssql_field.= $_POST[$arr_field[$nf]];
 			$ssql_field.= "'";
 		}
-		
+
 		$ssql_field = $ssql_field_set . substr($ssql_field,1);
 		$sql_str = "INSERT INTO $table_tab $ssql_field";
 		$sql_query = mysql_query($sql_str) or die(mysql_error());
@@ -177,7 +177,7 @@ function insert_all($table_tab) {
 		if (!$sql_query)
 			$msg =  'Invalid Query';
 	//$query = mysql_query("") or die('Insertion error'. mysql_error());
-	return $msg; 
+	return $msg;
 }
 
 
@@ -189,16 +189,16 @@ function counter($resource)	{
 
 //function to check existence of a valued variable
 function exist_b4($table,$field,$value)		{
-		
-		$existed = @mysql_query("SELECT $field FROM $table WHERE $field='$value'");// or die('Invalid Exist 
+
+		$existed = @mysql_query("SELECT $field FROM $table WHERE $field='$value'");// or die('Invalid Exist
 		//Query'. mysql_error());
-		
+
 		$no = counter($existed) ;
 		return $no;
 	}
 ?>
 
-<?php 
+<?php
 ####bootstrap Alert display based on error code
 function displayMsg ($errorCode,$errorMsg)	{
 	   if (($errorCode>0) && ($errorMsg!=""))	{
@@ -211,7 +211,7 @@ function displayMsg ($errorCode,$errorMsg)	{
 			elseif ($errorCode==3)	{
 				$alert="alert alert-danger";
 			}
-			else { 
+			else {
 				$alert="alert alert-warning";
 			}
 	   }
@@ -228,15 +228,15 @@ function replace ( $post ) {
 
 
 function post_name ( $post ) {
-	
+
 	##trim first
 	$postname=str_replace(" - "," ",$post);
 	$postname=str_replace("!","",$postname);
 	$postname=str_replace(",","",$postname);
 	$postname=str_replace("&#039;","",$postname);
 	$postname=str_replace("'","",$postname);
-	$postname=str_replace("’","",$postname);
-	$postname=str_replace("‘","",$postname);
+	$postname=str_replace("ï¿½","",$postname);
+	$postname=str_replace("ï¿½","",$postname);
 	$postname=str_replace(".","",$postname);
 	$postname=str_replace(":","",$postname);
 	$postname=str_replace("&","",$postname);
@@ -262,79 +262,78 @@ function post_name ( $post ) {
 	$postname=str_replace("=","",$postname);
 	$postname=str_replace('"\"',"",$postname);
 	$postname=str_replace("/","",$postname);
-	$postname=str_replace('“',"",$postname);
-	$postname=str_replace('”',"",$postname);
+	$postname=str_replace('ï¿½',"",$postname);
+	$postname=str_replace('ï¿½',"",$postname);
 	$postname=str_replace('"',"",$postname);
 	$postname=trim ( $postname );
 	$postname=str_replace(" ","-",$postname);
-	$postname=str_replace("-–-","",$postname);
+	$postname=str_replace("-ï¿½-","",$postname);
 	$postname=str_replace("--","",$postname);
 	$postname=str_replace(" ","-",$postname);
-	$postname=str_replace("- ","",$postname);
-	$postname=str_replace("  ","",$postname);
-	$postname=str_replace(" ","",$postname);
-	$postname=str_replace("-—","-",$postname);
-	$postname=str_replace("-—-","",$postname);
+	$postname=str_replace("-ï¿½","",$postname);
+	$postname=str_replace("ï¿½ï¿½","",$postname);
+	$postname=str_replace("ï¿½","",$postname);
+	$postname=str_replace("-ï¿½","-",$postname);
+	$postname=str_replace("-ï¿½-","",$postname);
 	$postname=strtolower ( $postname );
-	
+
 	return $postname;
-	
+
 }
 
 function title_check ( $title ) {
-	
+
 	##trim first
 	$title=str_replace("'","",$title);
 	$title=str_replace(".","",$title);
 	$title=trim ( $title );
-	
+
 	return $title;
-	
+
 }
 
 function bodyconvert ($post_body) {
-	
+
 	###[url= URLs
 	$body=str_replace('[url=','<a href="',$post_body);
 	$body=str_replace('[/url]','</a>',$body);
 	##[img= images
 	$body=str_replace('"[img]','"',$body);
-	$body=str_replace('[/img]"','"',$body);	
+	$body=str_replace('[/img]"','"',$body);
 	##real img check
 	$body=str_replace('[img]','<img src="',$body);
 	$body=str_replace('[/img]','">',$body);
 	###
-	$body=str_replace('“','"',$body);
+	$body=str_replace('ï¿½','"',$body);
 	### [b] strong
 	$body=str_replace('[b]','<strong>',$body);
 	$body=str_replace('[/b]','</strong>',$body);
 	### [html] strong
 	$body=str_replace('[html]','',$body);
-	$body=str_replace('[/html]','',$body); 
+	$body=str_replace('[/html]','',$body);
 	### [youtube] strong
 	$body=str_replace('[youtube]','<iframe src="',$body);
-	$body=str_replace('[/youtube]','"></iframe>',$body); 
+	$body=str_replace('[/youtube]','"></iframe>',$body);
 	####HTML encoderd
 	$body=str_replace('[&#8230;]','',$body);
-	###User Message 
+	###User Message
 	$body=str_replace(@$smf_message1,'',$body);
 	###loose ]
 	$body=str_replace(']','">',$body);
-	
+
 	return $body;
 }
 
 function total_record ( $table_name ) {
 		global $conn;
 		$sqlrec="SELECT count(*) as total from $table_name";
-        $result = mysqli_query($conn, $sqlrec);
+    $result = mysqli_query($conn, $sqlrec);
 		$row = mysqli_fetch_assoc($result);
-		
 
 		return $row['total'];
-		
-        mysqli_close($conn);
+
+    mysqli_close($conn);
 }
 
 
-?>	
+?>

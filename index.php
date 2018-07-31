@@ -7,7 +7,7 @@ include ("wizard.php");
 ## Connect using the connect db function
 $connect = connect_new($db_host,$db_user,$db_pass,$db_name);
 
-	
+
 if (isset($_POST['convert']) ) {
 	$select="SELECT * from $smf_table_name order by id_msg ASC limit 0,200";
 	$smf_query=mysql_query($select);
@@ -16,13 +16,13 @@ if (isset($_POST['convert']) ) {
 		$id_exist=exist_b4($wp_post_table,"guid",$row_convert['id_msg']);
 		##Check if message is a reply
 		$reply=substr($row_convert['subject'],0,3);
-		
-		
+
+
 		if ( ($id_exist<=0) && (strtolower($reply)!="re:") )  { ### if ID does not exist
 			##convert wordpress posts
 			$_POST['post_author']=1;
-			$_POST['post_date']=date("Y-m-d h:i:s",$row_convert['poster_time']); 
-			$_POST['post_date_gmt']=date("Y-m-d h:i:s",$row_convert['poster_time']); 
+			$_POST['post_date']=date("Y-m-d h:i:s",$row_convert['poster_time']);
+			$_POST['post_date_gmt']=date("Y-m-d h:i:s",$row_convert['poster_time']);
 			$_POST['post_content']= mysql_real_escape_string(bodyconvert ($row_convert['body']));
 			$_POST['post_title']= mysql_real_escape_string( title_check ($row_convert['subject']));
 			$_POST['post_excerpt']="";
@@ -36,12 +36,12 @@ if (isset($_POST['convert']) ) {
 			$_POST['menu_order']=0;
 			$_POST['post_type']="post";
 			$_POST['comment_count']=0;
-			
+
 			###insert into DB
 			$insert=@insert_all( $wp_post_table );
-			
-			
-			
+
+
+
 		} ##end if ID exist
 		## Insert Comments - Replies in SMF
 		$comment_id=mysql_real_escape_string(replace($row_convert['subject']));
@@ -53,20 +53,20 @@ if (isset($_POST['convert']) ) {
 			$_POST['comment_author_email']=$author_email;
 			$_POST['comment_author_url']="";
 			$_POST['comment_author_IP']="";
-			$_POST['comment_date']=date("Y-m-d h:i:s",$row_convert['poster_time']); 
-			$_POST['comment_date_gmt']=date("Y-m-d h:i:s",$row_convert['poster_time']); 
+			$_POST['comment_date']=date("Y-m-d h:i:s",$row_convert['poster_time']);
+			$_POST['comment_date_gmt']=date("Y-m-d h:i:s",$row_convert['poster_time']);
 			$_POST['comment_content']=mysql_real_escape_string(bodyconvert ($row_convert['body']));
 			$_POST['comment_approved']=1;
 			$_POST['comment_type']="";
 			$_POST['user_id']=0;
-			
+
 			###insert into Comment Table
 			$insert=@insert_all( $wp_comment_table );
 		}##end if comments
-		
+
 			$errorCode=1;
 			$errorMsg="SMF Message Convertion to Wordpress Table Completed!";
-		
+
 	}
 }
 ?>
@@ -103,20 +103,20 @@ echo displayMsg (@$errorCode,@$errorMsg);
 	<h4>Total Records: <br />
 	<span class="text-danger">
 	<?php echo total_record ( $smf_table_name ) ;
-	
+
 
 	#var_dump($result);
-	
-	
+
+
 	?>
 	</span></h4>
 	<hr class="label-warning" />
   </div>
-  
+
   <div class="col-lg-4" align="center">
 	 <input name="convert" type="submit" class="btn-lg btn-success" id="convert" value="Convert SMF &gt;&gt; WP" />
   </div>
-  		
+
   <div class="col-lg-4" align="right">
     <h4>Wordpress Table Name: <span class="text-success"><?=$wp_post_table;?></span></h4>
 	<h4>Total Records: <br />
@@ -131,8 +131,8 @@ echo displayMsg (@$errorCode,@$errorMsg);
   <p align="center">Email Me: <a href="mailto:olutola.obembe@primaxng.com">olutola.obembe@primaxng.com</a></p>
 
 </form>
-	
-	
+
+
 </div>
 </body>
 </html>
